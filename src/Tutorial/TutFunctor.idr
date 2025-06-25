@@ -64,6 +64,7 @@ mapConstIO = mapIO . const
 forgetIO : IO a -> IO ()
 forgetIO = mapConstIO ()
 
+public export
 data List01 : (nonEmpty : Bool) -> Type -> Type where
   Nil  : List01 False a
   (::) : a -> List01 False a -> List01 ne a
@@ -112,6 +113,7 @@ tailShowReversNoOp xs = map (reverse . show) (tail xs)
 tailShowReverse : Show a => List1 a -> List String
 tailShowReverse xs = reverse . show <$> tail xs
 
+public export
 record Product (f, g : Type -> Type) (a : Type) where
   constructor MkProduct
   fst : f a
@@ -138,6 +140,7 @@ productExample :  Show a
                -> (Either e String, List String)
 productExample = toPair . map show . fromPair {f = Either e, g = List}
 
+public export
 record Comp (f, g : Type -> Type) (a : Type) where
   constructor MkComp
   unComp  : f . g $ a
